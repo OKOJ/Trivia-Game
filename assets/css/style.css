@@ -1,0 +1,19 @@
+.container{
+    background-color: aliceblue;
+    text-align: center;
+    width: 80%;
+    height: 350px;
+    margin: 0 0 0 140px;
+    padding: 5px;
+    font-size: 20px;
+    font-family: 'B612', sans-serif;
+}
+h1{
+    font-size: 50px;
+    color: goldenrod;
+    margin: 0;
+    font-family: 'Fjalla One', sans-serif;
+}
+#game {
+    display: none;
+}
