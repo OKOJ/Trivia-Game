@@ -8,7 +8,7 @@ var triviaQuestions = [{
             d: "THE STAND"
         },
         correctAnswer: 'c',
-        gif: "https://media.giphy.com/media/3o72F0xOHtcV8K153q/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/3o72F0xOHtcV8K153q/giphy.gif' width='400px' height='250px'/>"
     },
     {
         question: "What character in Monty Python and the Holy Grail insists that 'It's just a flesh wound'?",
@@ -19,7 +19,8 @@ var triviaQuestions = [{
             d: "SIR LANCELOT"
         },
         correctAnswer: 'c',
-        gif: "https://media.giphy.com/media/fqEIk7Mqyij7O/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/fqEIk7Mqyij7O/giphy.gif' width='400px' height='250px'/>"
+
     },
     {
         question: "What was the first movie by Pixar to receive a rating higher than G in the United States?",
@@ -30,7 +31,8 @@ var triviaQuestions = [{
             d: "FINDING NEMO"
         },
         correctAnswer: 'c',
-        gif: "https://media.giphy.com/media/cituf0Vb5FYSk/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/cituf0Vb5FYSk/giphy.gif' width='400px' height='250px'/>"
+        // ""
     },
     {
         question: "Who is the only Top Gun actor who didn't vomit while in the fighter jets?",
@@ -41,7 +43,8 @@ var triviaQuestions = [{
             d: "JOHN STOCKWELL"
         },
         correctAnswer: 'a',
-        gif: "https://media.giphy.com/media/8qhPxH21vOG4w/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/8qhPxH21vOG4w/giphy.gif' width='400px' height='250px'/>"
+        //  ""
     },
     {
         question: "In The Wizard of Oz (1939), what was used to simulate snow during the poppy scene?",
@@ -52,7 +55,9 @@ var triviaQuestions = [{
             d: "POWDERED SUGAR"
         },
         correctAnswer: 'b',
-        gif: "https://media.giphy.com/media/bd1Fnrsrg91FS/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/bd1Fnrsrg91FS/giphy.gif' width='400px' height='250px'/>"
+
+        //""
     },
     {
         question: "What book did Jesse Eisenberg purchase during rehearsals for The Social Network?",
@@ -63,7 +68,8 @@ var triviaQuestions = [{
             d: "C++ FOR DUMMIES"
         },
         correctAnswer: 'd',
-        gif: "https://media.giphy.com/media/GAeH0yZbyggdq/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/GAeH0yZbyggdq/giphy.gif' width='400px' height='250px'/>"
+        // ""
     },
     {
         question: "How long did it take to render each frame (1/24th of a second) of the CGI scenes in the movie Avatar?",
@@ -74,7 +80,8 @@ var triviaQuestions = [{
             d: "47 SECONDS"
         },
         correctAnswer: 'c',
-        gif: "https://media.giphy.com/media/m9PW4tmO6bxrG/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/m9PW4tmO6bxrG/giphy.gif' width='400px' height='250px'/>"
+        //""
     },
     {
         question: "Who was the first Disney princess with a tattoo?",
@@ -85,7 +92,8 @@ var triviaQuestions = [{
             d: "POCAHONTAS"
         },
         correctAnswer: 'd',
-        gif: "https://media.giphy.com/media/yQWkWLGL120so/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/yQWkWLGL120so/giphy.gif' width='400px' height='250px'/>"
+        // ""
     },
     {
         question: "In Deadpool, Wade Wilson teams up with Colossus and what other member of the X-men?",
@@ -96,7 +104,8 @@ var triviaQuestions = [{
             d: "NEGASONIC TEENAGE WARHEAD"
         },
         correctAnswer: 'd',
-        gif: "https://media.giphy.com/media/l4pSY7O2rfgx7Urza/giphy.gif",
+        gif: "<img src='https://media.giphy.com/media/l4pSY7O2rfgx7Urza/giphy.gif' width='400px' height='250px'/>"
+        // "",
 
     },
     {
@@ -108,7 +117,8 @@ var triviaQuestions = [{
             d: "FROM RUSSIA WITH LOVE"
         },
         correctAnswer: 'b',
-        gif: "https://media.giphy.com/media/3oEjHNCWpx4iQYytAA/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/3oEjHNCWpx4iQYytAA/giphy.gif' width='400px' height='250px'/>"
+        //""
     },
     {
         question: "In Back to the Future, where does Dr Brown get the plutonium to power his time machine?",
@@ -119,7 +129,8 @@ var triviaQuestions = [{
             d: "THE FUTURE"
         },
         correctAnswer: 'c',
-        gif: "https://media.giphy.com/media/7ihxv12rz0i7S/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/7ihxv12rz0i7S/giphy.gif' width='400px' height='250px'/>"
+        //""
     },
     {
         question: "What movie popularized the phrase:'Show me the money'?",
@@ -130,12 +141,13 @@ var triviaQuestions = [{
             d: "RISKY BUSINESS"
         },
         correctAnswer: 'b',
-        gif: "https://media.giphy.com/media/7B71Ci4KE3m0/giphy.gif"
+        gif: "<img src='https://media.giphy.com/media/7B71Ci4KE3m0/giphy.gif' width='400px' height='250px'/>"
+        //""
     }
 ];
 
-console.log(triviaQuestions);
-
+//console.log(triviaQuestions);
+var playerAnswers = [];
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
@@ -147,31 +159,34 @@ var questionIndex = 0;
 function startGame() {
     //hide start button
     $("#start").click(function () {
-        $(".button, #game").toggle();
+        $(".button, #quiz").toggle();
     });
     displayQuestion();
     timer();
 
 };
 startGame();
-//set up timer 40 sec. per questions
+//set up timer 40 sec. per questions when start button clicked
 //display timer
 function timer() {
-
-    var countdown = 5;
-    $("#timer").text("Time Remaining:" + countdown)
-    countdownTimer = setInterval(function () {
-        countdown--;
+    $("#start").click(function () {
+        var countdown = 10;
         $("#timer").text("Time Remaining:" + countdown)
-        if (countdown === 0) {
-            stop();
-        };
-    }, 1000);
+        countdownTimer = setInterval(function () {
+            countdown--;
+            $("#timer").text("Time Remaining:" + countdown)
+            if (countdown === 0) {
+                stop();
+            };
+        }, 1000);
+    });
+
+    function stop() {
+        clearInterval(countdownTimer);
+    }
 };
 
-function stop() {
-    clearInterval(countdownTimer);
-}
+
 
 function displayQuestion() {
     //display questions 
@@ -181,49 +196,65 @@ function displayQuestion() {
     $("#answer2").text(triviaQuestions[questionIndex].answers.b)
     $("#answer3").text(triviaQuestions[questionIndex].answers.c)
     $("#answer4").text(triviaQuestions[questionIndex].answers.d)
+
+}
+
+function displayAnswer() {
+    $("#correct-answer").text("Correct Answer is:" + triviaQuestions[questionIndex].answer)
+    $("#gif").html(triviaQuestions[questionIndex].gif)
+    console.log(triviaQuestions[questionIndex].answer)
+}
+
+function displayResults() {
+    $("#correct").append(correctAnswers)
+    $("#incorrect").append(incorrectAnswers)
+    $("#unanswered").append(unanswered)
+
 }
 
 $(".answer").on("click", function () {
+    setTimeout(displayAnswer, 1000 * 5);
+
+    
     console.log($(this).attr('value'))
     //logic of the game
-    /*
-        //if answered correctly in time
-        //stop timer
-        //display a message 
-        //display GIF
-        //for 10 sec.
-        if ($(this).val() === correctAnswer) {
-
-
-            $("#message").append("CORRECT!")
-            $("#gif").html()
-
-        }
+    //change question page to answer page
+    $("#quiz,#answers").toggle();
+    //if answered correctly in time
+    //display a message 
+    //display GIF
+    //for 10 sec.
+    if ($(this).attr('value') === triviaQuestions[questionIndex].correctAnswer && countdownTimer > 0) {
+        
+        displayAnswer();
+        $("#correct-answer").hide();
+        $("#message").text("CORRECT!");
+        correctAnswers++
+        
+    };
+    
+    
         //if answered incorrectly in time
         //stop timer
         //display a message 
         //display GIF
         //for 10 sec.
-        if (playerAnswer !== correctAnswer) {
+        if ($(this).attr('value') !== triviaQuestions[questionIndex].correctAnswer && countdownTimer > 0 ) {
+            displayAnswer();
+            $("#message").text("INCORRECT!")
+            incorrectAnswers++
 
-
-            $("#message").append("INCORRECT!")
-            $("#correct-answer").append()
-            $("#gif").html()
-
-        }
+        };
         //if run out of time
         //stop timer
         //display a message 
         //display GIF
         //for 10 sec.
-        if (timer === 0) {
-
-
-            $("#message").append("TIME's UP!")
-            $("#correct-answer").append()
-            $("#gif").html()
-
-        }
-        */
-})
+        if (countdownTimer === 0) {
+            displayAnswer();
+            $("#message").text("TIME's UP!")
+            unanswered++;
+        };
+        $("#answers,#quiz,").toggle();
+        displayQuestion();
+});
