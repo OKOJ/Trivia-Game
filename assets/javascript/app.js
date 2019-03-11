@@ -60,56 +60,52 @@ var incorrectAnswers = 0;
 var unanswered = 0;
 var countdownTimer;
 var questionIndex = 0;
-var countdown = 10;
+var countdown = 27;
 
 //when start button clicked start the trivia, display questions with running timer
-function startGame() {
-    //hide start button
-    $("#start").click(function () {
-        $(".button, #quiz").toggle();
-        displayQuestion();
-        console.log("start");
-    });
+//hide start button
+$("#start").click(function () {
+    console.log("start");
+    $(".button, #quiz").toggle();
+    countdownTimer = setInterval(timer, 1000);
+    displayQuestion();
 
-};
-
+});
 //TIMER
-//set up timer 40 sec. per questions when start button clicked
+//set up timer 40 sec. per question when start button clicked
 //display timer
 function timer() {
-    $(document).on("click", function () {
-        console.log("timer")
-        $("#timer").text("Time remaining: " + "00:" + countdown + " secs")
-        countdownTimer = setInterval(function () {
-            countdown--;
-            $("#timer").text("Time remaining: " + "00:" + countdown + " secs")
-            /*if (countdown === 0) {
-                console.log("test");
-                $("#message").text("TIME's UP!");
-                displayAnswer();
-                unanswered++;
-                stop()
-                timer();
-                displayQuestion();
-                questionIndex +
-                    $("#answers,#quiz").toggle()
-            };*/
-        }, 1000);
-    });
+    countdown--;
+    console.log(countdown);
+    $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
+    if (!countdown) {
+        stopTimer();
+        // console.log("test");
+        $("#message").text("TIME's UP!");
+        displayAnswer();
+        unanswered++;
+        stopTimer()
+        //timer();
+        //displayQuestion();
+        countdownTimer = setInterval(timer, 1000);
+        questionIndex++
+        $("#answers,#quiz").toggle()
 
+    }
+    stopTimer()
 };
 
-function stop() {
+function stopTimer() {
     clearInterval(countdownTimer);
 };
 
 function displayQuestion() {
-    stop()
-    timer();
+    console.log("questions")
+    countdownTimer = setInterval(timer, 1000);
+    $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
+    stopTimer()
 
-    /*for (var i= 0; i > triviaQuestions.length; i++){
-        questionIndex[i];
-    }*/
+    //timer();
     //display questions 
     $("#questions").text(triviaQuestions[questionIndex].question);
     //display 4 answers
@@ -117,41 +113,36 @@ function displayQuestion() {
     $("#answer2").text(triviaQuestions[questionIndex].answers.b)
     $("#answer3").text(triviaQuestions[questionIndex].answers.c)
     $("#answer4").text(triviaQuestions[questionIndex].answers.d)
-    console.log("questions")
-
-    /* countdownTimer = setInterval(function () {
-          $("#timer").text("Time remaining: " + "00:" + countdown + " secs")
-          countdown--;
-          if (countdown === 0) {
-              console.log('countdown');
-              displayAnswer();
-              //$("#quiz,#answers").toggle()
-              stop();
-          };
-
-      }, 1000);*/
+    //console.log("next question")
 
 };
 
-
 function displayAnswer() {
-    stop()
-     timer()
+    console.log('answer');
+    stopTimer();
+    //countdownTimer = setInterval(timer, 1000);
+    // timer()
     //console.log(triviaQuestions[questionIndex].correctAnswer);
     //display message, correct answer and gif 
     $("#correct-answer").text("Correct Answer is: " + triviaQuestions[questionIndex].correctAnswer)
     $("#gif").html(triviaQuestions[questionIndex].gif)
+
     setTimeout(function () {
-        questionIndex++
+        if (questionIndex <= triviaQuestions.length) {
+            questionIndex++;
+        } else {
+            displayResults();
+            //console.log("over");
+        };
+        
         displayQuestion();
-        $("#answers,#quiz").toggle()
-        console.log('answer')
+        questionIndex++;
+        $("#answers,#quiz").toggle();
+        //displayAnswer()
+        //console.log("next question")
     }, 3000);
 };
 
-/*function restartGame() {
-    startGame();
-}*/
 
 function displayResults() {
     //display result and ask if player want to try again
@@ -161,47 +152,33 @@ function displayResults() {
     $("#start-over").text("Try Again?")
 };
 
-/*$("#start-over").on("click", function () {
-    restartGame()
-})*/
+//logic of the game
+//when clicked on the answer
+//change question page to answer page
 
 $(".answer").on("click", function () {
-
     console.log($(this).attr('value'))
-    //logic of the game
-    //change question page to answer page
     $("#quiz,#answers").toggle();
-    //if answered correctly in time
-    //display a message 
-    //display GIF
-    //for 10 sec.
+    //if answered correctly and in time
+    //display a message and display GIF for 10 sec.
     if ($(this).attr('value') === triviaQuestions[questionIndex].answer && countdown > 0) {
-
-        displayAnswer();
+        console.log("correct")
         $("#correct-answer").hide();
         $("#message").text("CORRECT!");
         correctAnswers++
-
-    };
-
-
-    //if answered incorrectly in time
-    //stop timer
-    //display a message 
-    //display GIF
-    //for 10 sec.
-    if ($(this).attr('value') !== triviaQuestions[questionIndex].answer && countdown > 0) {
         displayAnswer();
+    };
+    //if answered incorrectly and in time
+    //display a message and GIF for 10 sec.
+    if ($(this).attr('value') !== triviaQuestions[questionIndex].answer && countdown > 0) {
+        console.log("incorrect")
         $("#correct-answer").show();
         $("#message").text("INCORRECT!")
         incorrectAnswers++
-
+        displayAnswer();
     };
     //if run out of time
-    //stop timer
-    //display a message 
-    //display GIF
-    //for 10 sec.
+    //display a message, display GIF for 10 sec.
     /*if (countdown ===0) {
         console.log("timesup")
         $("#message").text("TIME's UP!");
@@ -212,4 +189,3 @@ $(".answer").on("click", function () {
 
 
 });
-startGame()
