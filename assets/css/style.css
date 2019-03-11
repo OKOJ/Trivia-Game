@@ -1,5 +1,5 @@
 .container {
-    background-color: aliceblue;
+    background-color: grey;
     text-align: center;
     width: 60%;
     height: 400px;
@@ -14,6 +14,16 @@ h1 {
     color: goldenrod;
     margin: 0;
     font-family: 'Fjalla One', sans-serif;
+}
+
+#start{
+    background-color: black;
+    color:gold;
+    width: 100px;
+    height: 60px;
+    margin: 100px 0 0 0;
+    font-size: 24px;
+    font-family: 'B612', sans-serif;
 }
 
 #quiz,
@@ -32,7 +42,7 @@ h1 {
 }
 
 .answer:hover {
-    color: gold;
+    color: rgb(255, 215, 0);
 }
 
 #questions{
