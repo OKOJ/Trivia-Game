@@ -1,4 +1,4 @@
-//create variables questions
+//create questions object with questions,answers,correct answer and gifs
 var triviaQuestions = [{
         question: "What is the longest movie ever made?",
         answers: {
@@ -60,52 +60,55 @@ var incorrectAnswers = 0;
 var unanswered = 0;
 var countdownTimer;
 var questionIndex = 0;
-var countdown = 27;
+var countdown = 7;
 
 //when start button clicked start the trivia, display questions with running timer
 //hide start button
 $("#start").click(function () {
     console.log("start");
     $(".button, #quiz").toggle();
-    countdownTimer = setInterval(timer, 1000);
     displayQuestion();
 
 });
 //TIMER
-//set up timer 40 sec. per question when start button clicked
-//display timer
-function timer() {
-    countdown--;
-    console.log(countdown);
-    $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
-    if (!countdown) {
-        stopTimer();
-        // console.log("test");
-        $("#message").text("TIME's UP!");
-        displayAnswer();
-        unanswered++;
-        stopTimer()
-        //timer();
-        //displayQuestion();
-        countdownTimer = setInterval(timer, 1000);
-        questionIndex++
-        $("#answers,#quiz").toggle()
-
+//set up timer 30 sec. per question when start button clicked start and 
+//stops when question is answered or run out of time, displayed on a question page
+//timer
+/*function timer() {
+    countdownTimer = setInterval(time, 1000);
+    function time() {
+        if (countdown === 0) {
+            stopTimer()
+            //make a function run out of time
+            outOfTime()
+        }
+        if (countdown > 0) {
+            countdown--;
+            console.log(countdown)
+        }
+        $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
     }
-    stopTimer()
-};
+}*/
 
+//stop timer
 function stopTimer() {
     clearInterval(countdownTimer);
 };
 
+//when run out of time, display answer page with "Time is up" message
+function outOfTime(){
+    console.log("out of time")
+    $("#message").text("TIME's UP!");
+    displayAnswer()
+    $("#quiz,#answers").toggle();
+    //displayQuestion()
+}
+
+//page with a question and 4 options for answer,and running timer
+//when answer clicked goes to the answer page
 function displayQuestion() {
     console.log("questions")
-    countdownTimer = setInterval(timer, 1000);
     $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
-    stopTimer()
-
-    //timer();
     //display questions 
     $("#questions").text(triviaQuestions[questionIndex].question);
     //display 4 answers
@@ -113,54 +116,47 @@ function displayQuestion() {
     $("#answer2").text(triviaQuestions[questionIndex].answers.b)
     $("#answer3").text(triviaQuestions[questionIndex].answers.c)
     $("#answer4").text(triviaQuestions[questionIndex].answers.d)
-    //console.log("next question")
-
 };
-
+//page with answer: display message, correct answer and gif for 3sec.
 function displayAnswer() {
     console.log('answer');
-    stopTimer();
-    //countdownTimer = setInterval(timer, 1000);
-    // timer()
-    //console.log(triviaQuestions[questionIndex].correctAnswer);
-    //display message, correct answer and gif 
+    console.log(triviaQuestions[questionIndex].correctAnswer);
     $("#correct-answer").text("Correct Answer is: " + triviaQuestions[questionIndex].correctAnswer)
     $("#gif").html(triviaQuestions[questionIndex].gif)
-
-    setTimeout(function () {
-        if (questionIndex <= triviaQuestions.length) {
-            questionIndex++;
-        } else {
-            displayResults();
-            //console.log("over");
-        };
-        
-        displayQuestion();
-        questionIndex++;
-        $("#answers,#quiz").toggle();
-        //displayAnswer()
-        //console.log("next question")
-    }, 3000);
+    setTimeout(nextQuestion,3000)
 };
+//if statement for going through every questions
+function nextQuestion(){
+    if (questionIndex <= triviaQuestions.length) {
+        console.log("next Q")
+        questionIndex++;
+    } 
+    if (questionIndex === triviaQuestions.length) {
+        displayResults();
+        console.log("over");
+    };
+    displayQuestion();
+    $("#answers,#quiz").toggle();
+}
 
-
+//display result and ask if player want to try again
 function displayResults() {
-    //display result and ask if player want to try again
-    $("#correct").append(correctAnswers)
-    $("#incorrect").append(incorrectAnswers)
-    $("#unanswered").append(unanswered)
+    $("#answers,#result").toggle();
+    $("#final-message").text("Great Job!")
+    $("#correct").append("Correct answers: " + correctAnswers)
+    $("#incorrect").append("Incorrect answers: " + incorrectAnswers)
+    $("#unanswered").append("Unanswered: " + unanswered)
     $("#start-over").text("Try Again?")
 };
 
 //logic of the game
 //when clicked on the answer
 //change question page to answer page
-
 $(".answer").on("click", function () {
     console.log($(this).attr('value'))
     $("#quiz,#answers").toggle();
     //if answered correctly and in time
-    //display a message and display GIF for 10 sec.
+    //display a message and display GIF for 3 sec.
     if ($(this).attr('value') === triviaQuestions[questionIndex].answer && countdown > 0) {
         console.log("correct")
         $("#correct-answer").hide();
@@ -169,7 +165,7 @@ $(".answer").on("click", function () {
         displayAnswer();
     };
     //if answered incorrectly and in time
-    //display a message and GIF for 10 sec.
+    //display a message and GIF for 3 sec.
     if ($(this).attr('value') !== triviaQuestions[questionIndex].answer && countdown > 0) {
         console.log("incorrect")
         $("#correct-answer").show();
@@ -177,15 +173,4 @@ $(".answer").on("click", function () {
         incorrectAnswers++
         displayAnswer();
     };
-    //if run out of time
-    //display a message, display GIF for 10 sec.
-    /*if (countdown ===0) {
-        console.log("timesup")
-        $("#message").text("TIME's UP!");
-        displayAnswer();
-        unanswered++;
-    };*/
-
-
-
 });

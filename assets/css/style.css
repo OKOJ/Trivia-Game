@@ -1,8 +1,8 @@
 .container {
-    background-color: white;
+    background-color: rgb(255, 246, 230);
     text-align: center;
     width: 60%;
-    height: 400px;
+    height: 425px;
     margin: 0 0 0 290px;
     padding: 5px;
     font-size: 20px;
@@ -16,9 +16,9 @@ h1 {
     font-family: 'Fjalla One', sans-serif;
 }
 
-#start{
-    background-color: black;
-    color:gold;
+#start {
+    background-color: none;
+    color: goldenrod;
     width: 100px;
     height: 60px;
     margin: 100px 0 0 0;
@@ -33,18 +33,31 @@ h1 {
     padding: 10px;
     margin: 0px;
 }
-#timer{
-    margin: 15px 5px ;
+
+#timer {
+    margin: 15px 5px;
 }
 
-.answer{
-    margin:15px 5px ;
+
+.answer {
+    margin: 15px 5px;
 }
 
+#start-over:hover,
 .answer:hover {
     color: rgb(255, 215, 0);
 }
 
-#questions{
-    font-size: 30px;
+#final-message,
+#start-over,
+#questions {
+    font-size: 26px;
+}
+
+#final-message,
+#correct,
+#incorrect,
+#unanswered,
+#start-over {
+    margin: 15px 5px;
 }
