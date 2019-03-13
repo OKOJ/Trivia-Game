@@ -14,3 +14,7 @@
 
 
 ## GOOD LUCK!
+
+#### Note
+
+* Game is not respotsive to the media query.
