@@ -38,9 +38,13 @@ h1 {
     margin: 15px 5px;
 }
 
+#gif{
+    margin: 15px 5px;
+}
 
 .answer {
     margin: 15px 5px;
+    
 }
 
 #start-over:hover,
@@ -52,6 +56,7 @@ h1 {
 #start-over,
 #questions {
     font-size: 26px;
+    margin: 10px 5px 40px 5px;
 }
 
 #final-message,

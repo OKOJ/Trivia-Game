@@ -8,7 +8,7 @@
 
 * Answer a 12 questions
 
-* You have 30 sec. per questions.
+* You have 20 sec. per questions.
 
 * By the end, results will be displayed. 
 

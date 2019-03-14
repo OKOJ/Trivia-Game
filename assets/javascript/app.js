@@ -163,41 +163,39 @@ var incorrectAnswers = 0;
 var unanswered = 0;
 var countdownTimer;
 var questionIndex = 0;
-var countdown = 25;
+var countdown =20;
 
 //when start button clicked start the trivia, display questions with running timer
 //hide start button
 $("#start").click(function () {
-    console.log("start");
+   // console.log("start");
     $(".button, #quiz").toggle();
-    //displayQuestion();
-    startGame()
+    startGame();
 });
 
 function startGame() {
     displayQuestion();
 };
 //TIMER
-//set up timer 25 sec. per question when start button clicked start and 
+//set up timer 20 sec. per question when start button clicked start and 
 //stops when question is answered or run out of time, displayed on a question page
 //timer
+
+function time() {
+    if (countdown === 0) {
+        outOfTime();
+        stopTimer();
+        //make a function run out of time
+    }
+    if (countdown > 0) {
+        countdown--;
+        //console.log(countdown);
+    }
+    $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
+};
+
 function timer() {
     countdownTimer = setInterval(time, 1000);
-
-    function time() {
-        if (countdown === 0) {
-            outOfTime()
-            stopTimer()
-            //make a function run out of time
-
-        }
-        if (countdown > 0) {
-            countdown--;
-            console.log(countdown)
-        }
-        $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
-    }
-
 };
 
 //stop timer
@@ -207,11 +205,11 @@ function stopTimer() {
 
 //when run out of time, display answer page with "Time is up" message
 function outOfTime() {
-    console.log("out of time")
-    stopTimer()
+    //console.log("out of time");
+    stopTimer();
     unanswered++;
     $("#message").text("TIME's UP!");
-    displayAnswer()
+    displayAnswer();
     $("#correct-answer").show();
     $("#quiz,#answers").toggle();
 };
@@ -219,46 +217,48 @@ function outOfTime() {
 //page with a question and 4 options for answer,and running timer
 //when answer clicked goes to the answer page
 function displayQuestion() {
-    console.log("questions")
-    stopTimer()
-    timer()
-    countdown =25;
+    //console.log("questions");
+    stopTimer();
+    timer();
+    countdown =20;
     $("#timer").text("Time remaining: " + "00:" + countdown + " secs");
     //display questions 
     $("#questions").text(triviaQuestions[questionIndex].question);
     //display 4 answers
-    $("#answer1").text(triviaQuestions[questionIndex].answers.a)
-    $("#answer2").text(triviaQuestions[questionIndex].answers.b)
-    $("#answer3").text(triviaQuestions[questionIndex].answers.c)
-    $("#answer4").text(triviaQuestions[questionIndex].answers.d)
+    $("#answer1").text(triviaQuestions[questionIndex].answers.a);
+    $("#answer2").text(triviaQuestions[questionIndex].answers.b);
+    $("#answer3").text(triviaQuestions[questionIndex].answers.c);
+    $("#answer4").text(triviaQuestions[questionIndex].answers.d);
+};
 
-};
-//page with answer: display message, correct answer and gif for 4sec.
+//page with answer: display message, correct answer and gif for 3.3sec.
 function displayAnswer() {
-    console.log('answer');
-    console.log(triviaQuestions[questionIndex].correctAnswer);
-    $("#correct-answer").text("Correct Answer is: " + triviaQuestions[questionIndex].correctAnswer)
-    $("#gif").html(triviaQuestions[questionIndex].gif)
-    setTimeout(nextQuestion, 4000)
+    //console.log('answer');
+    //console.log(triviaQuestions[questionIndex].correctAnswer);
+    $("#correct-answer").text("Correct Answer is: " + triviaQuestions[questionIndex].correctAnswer);
+    $("#gif").html(triviaQuestions[questionIndex].gif);
+    setTimeout(nextQuestion, 3300);
 };
+
 //if statement for going through every questions
 function nextQuestion() {
     if (questionIndex <= triviaQuestions.length) {
-        console.log("next Q")
+        //console.log("next Q");
         questionIndex++;
     };
     if (questionIndex === triviaQuestions.length) {
-        stopTimer()
+        stopTimer();
         displayResults();
-        console.log("over");
+        //console.log("over");
+        return;
     };
     displayQuestion();
     $("#answers,#quiz").toggle();
-}
+};
 
 //display result and ask if player want to try again
 function displayResults() {
-    stopTimer()
+    stopTimer();
     $("#answers,#result").toggle();
     $("#final-message").text("Great Job!");
     $("#correct").html("Correct answers: " + correctAnswers);
@@ -268,19 +268,19 @@ function displayResults() {
     $("#start-over").on("click", function () {
         restartGame();
     });
-
 };
+
 //Restart game without refreshing the page
 function restartGame() {
-    console.log("restart")
+    //console.log("restart");
     playerAnswers = [];
     correctAnswers = 0;
     incorrectAnswers = 0;
     unanswered = 0;
     countdownTimer;
     questionIndex = 0;
-    countdown = 25;
-    stopTimer()
+    countdown =20;
+    stopTimer();
     $("#result, #quiz").toggle();
     startGame();
 };
@@ -289,24 +289,26 @@ function restartGame() {
 //when clicked on the answer
 //change question page to answer page
 $(".answer").on("click", function () {
-    console.log($(this).attr('value'))
+    //console.log($(this).attr('value'));
     $("#quiz,#answers").toggle();
-    stopTimer()
+    stopTimer();
+
     //if answered correctly and in time
-    //display a message and display GIF for 3 sec.
+    //display a message and display GIF for 3.3 sec.
     if ($(this).attr('value') === triviaQuestions[questionIndex].answer && countdown >= 0) {
-        console.log("correct")
+        //console.log("correct");
         $("#correct-answer").hide();
         $("#message").text("CORRECT!");
         correctAnswers++
         displayAnswer();
     };
+
     //if answered incorrectly and in time
-    //display a message and GIF for 3 sec.
+    //display a message and GIF for 3.3 sec.
     if ($(this).attr('value') !== triviaQuestions[questionIndex].answer && countdown >= 0) {
-        console.log("incorrect")
+        //console.log("incorrect");
         $("#correct-answer").show();
-        $("#message").text("INCORRECT!")
+        $("#message").text("INCORRECT!");
         incorrectAnswers++
         displayAnswer();
     };
