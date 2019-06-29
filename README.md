@@ -1,4 +1,4 @@
-# Movie Trivia Game
+# [Movie Trivia Game](https://okoj.github.io/Trivia-Game/)
 
 ## Do you like movie? Do you think you know all about them?
 
